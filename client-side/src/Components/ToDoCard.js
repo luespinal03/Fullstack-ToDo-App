@@ -1,7 +1,22 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 
-const ToDoCard = ({ toDoList }) => {
+
+
+
+
+
+const ToDoCard = ({ toDoList, urlEndpoint }) => {
     // const toDoItem = { props }
+    const [id, setId] = useState("");
+    const [todoToUpdate, setTodoToUpdate] = useState({});
+
+    const handleSetToDoComplete = async () => {
+
+    };
+
+
+
+
     return (
         <div className="movie-list-card">
             <h2>{toDoList.title}</h2>

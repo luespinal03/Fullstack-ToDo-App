@@ -1,6 +1,8 @@
 import React from 'react'
 import ToDocard from '../Components/ToDoCard'
 
+const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
+
 const HomePage = (props) => {
     console.log(props)
 
@@ -8,7 +10,7 @@ const HomePage = (props) => {
         <div>
             <h1>Fullstack ToDo Application </h1>
             {props.toDoList.map((todo, index) => {
-                return <ToDocard key={index} toDoList={todo} />
+                return <ToDocard key={index} toDoList={todo} urlEndpoint={urlEndpoint} />
             })}
         </div>
     )

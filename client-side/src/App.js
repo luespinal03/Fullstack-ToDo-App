@@ -13,7 +13,6 @@ function App() {
   const [toDoList, setToDoList] = useState([]);
 
 
-
   useEffect(() => {
     const findBlog = async () => {
       const result = await fetch(`${urlEndpoint}/todos/all`)
@@ -38,7 +37,7 @@ function App() {
         {
           // index is true in order to make it default element that displays for the path?
           index: true,
-          element: <HomePage toDoList={toDoList} />
+          element: <HomePage toDoList={toDoList} urlEndpoint={urlEndpoint} />
         },
         // path below takes us to the Movie list section and renders the stuff inside <MovieLayout/> component as we pass the list of movies (movieList) as a prop into <MovieLayout/> component
         {

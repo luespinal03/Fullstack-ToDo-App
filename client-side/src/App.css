@@ -67,3 +67,7 @@ button {
   font-size: 25px;
   border-radius: 20%;
 }
+
+textarea {
+  font-size: 25px;
+}
