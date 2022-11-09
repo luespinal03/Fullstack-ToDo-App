@@ -3,6 +3,7 @@ import GlobalLayout from './Layouts/GlobalLayout';
 import HomePage from './Pages/HomePage'
 import './App.css';
 import { useState, useEffect } from 'react';
+import ToDoFormPage from './Pages/ToDoFormPage';
 
 
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
@@ -41,6 +42,8 @@ function App() {
         },
         // path below takes us to the Movie list section and renders the stuff inside <MovieLayout/> component as we pass the list of movies (movieList) as a prop into <MovieLayout/> component
         {
+          path: "/todo-form",
+          element: <ToDoFormPage urlEndpoint={urlEndpoint} />
 
         }
       ]
@@ -48,9 +51,11 @@ function App() {
   ]);
 
   return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
+    <header className='App-header'>
+      <div className="App">
+        <RouterProvider router={router} />
+      </div>
+    </header>
   );
 }
 

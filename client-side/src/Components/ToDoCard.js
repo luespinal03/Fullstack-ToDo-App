@@ -3,7 +3,7 @@ import React from 'react'
 const ToDoCard = ({ toDoList }) => {
     // const toDoItem = { props }
     return (
-        <div>
+        <div className="movie-list-card">
             <h2>{toDoList.title}</h2>
             <p>ID: {toDoList.id}</p>
             <p>Description: {toDoList.description}</p>
