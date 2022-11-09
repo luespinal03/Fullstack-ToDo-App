@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const { v4 } = require('uuid');
 
 
 
@@ -69,5 +70,36 @@ router.get('/all', async function (req, res, next) {
     // })
     // }
 });
+
+
+
+router.post('/create-one', async function (req, res, next) {
+    try {
+        console.log(req.body)
+
+        const newTodo = {
+            ...req.body,
+            id: v4(),
+            isComplete: false,
+            creationDate: new Date(),
+            lastModified: new Date(),
+            completedDate: null
+
+        }
+        console.log(newTodo)
+        // const result = await db().collection('BlogsDB').insertOne(newBlog)
+        res.json({
+            success: true,
+            todo: newTodo
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.json({
+            success: false,
+            error: err.toString()
+        })
+    }
+})
 
 module.exports = router;
