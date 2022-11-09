@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const { v4 } = require('uuid');
 
+const { db } = require("../mongo");
+
 
 
 const mockTodos = [{
@@ -54,21 +56,21 @@ const mockTodos = [{
 /* GET home page. */
 router.get('/all', async function (req, res, next) {
 
-    // try {
-    // const todoItem = await mockTodos({}).find({}).toArray()
+    try {
+        const todoItem = await db().collection('todos').find({}).toArray();
 
-    res.json({
-        success: true,
-        todo: mockTodos
-    });
-    // }
-    // catch (err) {
-    // console.log(err)
-    // res.json({
-    //     success: false,
-    //     error: err.toString()
-    // })
-    // }
+        res.json({
+            success: true,
+            todo: todoItem
+        });
+    }
+    catch (err) {
+        console.log(err)
+        res.json({
+            success: false,
+            error: err.toString()
+        })
+    }
 });
 
 
@@ -80,14 +82,20 @@ router.post('/create-one', async function (req, res, next) {
         const newTodo = {
             ...req.body,
             id: v4(),
+            title: req.body.title,
+            description: req.body.description,
             isComplete: false,
+            priority: req.body.priority,
             creationDate: new Date(),
             lastModified: new Date(),
             completedDate: null
 
         }
         console.log(newTodo)
-        // const result = await db().collection('BlogsDB').insertOne(newBlog)
+        const result = await db().collection('todos').insertOne(newTodo)
+
+        console.log(result);
+
         res.json({
             success: true,
             todo: newTodo
@@ -100,6 +108,8 @@ router.post('/create-one', async function (req, res, next) {
             error: err.toString()
         })
     }
-})
+});
+
+
 
 module.exports = router;
