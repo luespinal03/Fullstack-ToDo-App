@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../App.css'
+
 
 
 const ToDoFormPage = ({ urlEndpoint }) => {
@@ -7,6 +9,11 @@ const ToDoFormPage = ({ urlEndpoint }) => {
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('')
     const [successMessage, setSuccessMessage] = useState("")
+
+    const navigate = useNavigate();
+    const redirectHome = () => {
+        navigate('/')
+    };
 
     const handleCreateTodo = async () => {
         setSuccessMessage("")
@@ -53,7 +60,7 @@ const ToDoFormPage = ({ urlEndpoint }) => {
             </select>
             <br />
             <br />
-            <button onClick={() => { handleCreateTodo() }}>Create ToDo</button>
+            <button onClick={() => { handleCreateTodo(); redirectHome() }}>Create ToDo</button>
         </div>
     )
 }

@@ -10,7 +10,7 @@ const HomePage = (props) => {
         <div>
             <h1>Fullstack ToDo Application </h1>
             {props.toDoList.map((todo, index) => {
-                return <ToDocard key={index} toDoList={todo} urlEndpoint={urlEndpoint} />
+                return <ToDocard key={index} toDoList={todo} urlEndpoint={urlEndpoint} update={props.update} />
             })}
         </div>
     )
