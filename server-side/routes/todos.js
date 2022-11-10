@@ -74,7 +74,7 @@ router.get('/all', async function (req, res, next) {
 });
 
 
-
+// POSTING A NEW ONE
 router.post('/create-one', async function (req, res, next) {
     try {
         console.log(req.body)
@@ -110,6 +110,9 @@ router.post('/create-one', async function (req, res, next) {
     }
 });
 
+
+
+// UPDATING A NEW ONE
 router.put('/update-one/:id', async function (req, res, next) {
     try {
         console.log(req.body)
@@ -121,7 +124,7 @@ router.put('/update-one/:id', async function (req, res, next) {
 
         res.json({
             success: true,
-            post: todoItem
+            todo: todoItem
         })
         console.log(todoItem)
     }
@@ -135,6 +138,26 @@ router.put('/update-one/:id', async function (req, res, next) {
     }
 })
 
+
+router.delete('/delete-one/:id', async function (req, res, next) {
+    try {
+        const id = req.params.id
+
+        const todoItem = await db().collection("todos").deleteOne({ id: id })
+
+        res.json({
+            success: true,
+            todo: todoItem
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.json({
+            success: false,
+            error: err.toString()
+        })
+    }
+})
 
 
 module.exports = router;
