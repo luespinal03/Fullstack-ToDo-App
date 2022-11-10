@@ -110,6 +110,31 @@ router.post('/create-one', async function (req, res, next) {
     }
 });
 
+router.put('/update-one/:id', async function (req, res, next) {
+    try {
+        console.log(req.body)
+        const id = req.params.id
+        const isComplete = req.body.isComplete
+        const lastModified = new Date()
+
+        const todoItem = await db().collection("todos").update({ id: id }, { $set: { "isComplete": isComplete, "lastModified": lastModified } })
+
+        res.json({
+            success: true,
+            post: todoItem
+        })
+        console.log(todoItem)
+    }
+
+    catch (err) {
+        console.log(err)
+        res.json({
+            success: false,
+            error: err.toString()
+        })
+    }
+})
+
 
 
 module.exports = router;
