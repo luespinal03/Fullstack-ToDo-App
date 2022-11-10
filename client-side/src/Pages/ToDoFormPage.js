@@ -4,7 +4,7 @@ import '../App.css'
 
 
 
-const ToDoFormPage = ({ urlEndpoint }) => {
+const ToDoFormPage = ({ urlEndpoint, refetch }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('')
@@ -15,7 +15,9 @@ const ToDoFormPage = ({ urlEndpoint }) => {
         navigate('/')
     };
 
+    // function in charge of handling the new cleation of a Todo item
     const handleCreateTodo = async () => {
+        refetch(true)
         setSuccessMessage("")
         const response = await fetch(`${urlEndpoint}/todos/create-one`, {
             method: "POST",
@@ -60,7 +62,7 @@ const ToDoFormPage = ({ urlEndpoint }) => {
             </select>
             <br />
             <br />
-            <button onClick={() => { handleCreateTodo(); redirectHome() }}>Create ToDo</button>
+            <button onClick={() => { handleCreateTodo(); redirectHome(); }}>Create ToDo</button>
         </div>
     )
 }

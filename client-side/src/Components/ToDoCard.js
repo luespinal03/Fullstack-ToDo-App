@@ -1,10 +1,11 @@
 
 
-const ToDoCard = ({ toDoList, urlEndpoint, update }) => {
+const ToDoCard = ({ toDoList, urlEndpoint, refetch }) => {
     const id = toDoList.id
 
+    // this controls whether the todo is completed or not
     const handleSetToDoComplete = async () => {
-        update(true)
+        refetch(true)
         const request = await fetch(`${urlEndpoint}/todos/update-one/${id}`, {
             method: "PUT",
             headers: {
@@ -15,8 +16,19 @@ const ToDoCard = ({ toDoList, urlEndpoint, update }) => {
             }),
         })
         // update needs to be set back to false otherwise it wont listen for anymore changes after the initial one
-        update(false)
+        refetch(false)
     }
+
+
+    // this function controls the ability to delete a todo
+    const handleDeleteToDo = async () => {
+        refetch(true)
+        const request = await fetch(`${urlEndpoint}/todos/delete-one/${id}`, {
+            method: "DELETE",
+        })
+        refetch(false)
+    }
+
 
     return (
         <div className="movie-list-card">
@@ -26,6 +38,8 @@ const ToDoCard = ({ toDoList, urlEndpoint, update }) => {
             <p>Priority: {toDoList.priority}</p>
             <p>Is Complete:{toDoList.isComplete ? ' Complete' : ' Incomplete'}</p>
             <button onClick={(e) => { handleSetToDoComplete() }}>Toggle Complete</button>
+            <br />
+            <button onClick={(e) => { handleDeleteToDo() }}>Delete</button>
             <p>Creation Date: {toDoList.creationDate.toString()}</p>
             <p>Last Modified: {toDoList.lastModified.toString()}</p>
             <p>Completed Date: {toDoList.completedDate !== null && toDoList.completedDate}</p>

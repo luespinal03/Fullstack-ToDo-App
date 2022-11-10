@@ -11,7 +11,8 @@ const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
 function App() {
 
   const [toDoList, setToDoList] = useState([]);
-  const [update, setUpdate] = useState(false);
+  // this refetch state is used to re-render the page when we delete one item, update and item or edit. It is being passed into <HomePage/> which is then passed into <ToDoCard/> as a prop. Also being passed into <TodoFormPage/> for it to be used in the function in charge of creating a new todo. That way when we create a new todo item the whole page re-renders as well. 
+  const [refetch, setRefetch] = useState(false);
 
   useEffect(() => {
     const findBlog = async () => {
@@ -21,7 +22,7 @@ function App() {
       setToDoList(fetchedTodos.todo)
     }
     findBlog()
-  }, [update])
+  }, [refetch])
 
 
 
@@ -37,12 +38,12 @@ function App() {
         {
           // index is true in order to make it default element that displays for the path?
           index: true,
-          element: <HomePage toDoList={toDoList} urlEndpoint={urlEndpoint} update={setUpdate} />
+          element: <HomePage toDoList={toDoList} urlEndpoint={urlEndpoint} refetch={setRefetch} />
         },
         // path below takes us to the Movie list section and renders the stuff inside <MovieLayout/> component as we pass the list of movies (movieList) as a prop into <MovieLayout/> component
         {
           path: "/todo-form",
-          element: <ToDoFormPage urlEndpoint={urlEndpoint} />
+          element: <ToDoFormPage urlEndpoint={urlEndpoint} refetch={setRefetch} />
 
         }
       ]
