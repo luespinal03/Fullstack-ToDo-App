@@ -4,6 +4,7 @@ import '../App.css'
 
 
 
+
 const ToDoFormPage = ({ urlEndpoint, refetch }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -15,7 +16,7 @@ const ToDoFormPage = ({ urlEndpoint, refetch }) => {
         navigate('/')
     };
 
-    // function in charge of handling the new cleation of a Todo item
+    // function in charge of handling the new creation of a Todo item
     const handleCreateTodo = async () => {
         refetch(true)
         setSuccessMessage("")

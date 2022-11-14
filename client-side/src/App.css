@@ -68,6 +68,11 @@ button {
   border-radius: 20%;
 }
 
+button:hover {
+  background-color: #979dac; /* Green */
+  color: white;
+}
+
 textarea {
   font-size: 25px;
 }

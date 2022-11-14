@@ -1,4 +1,4 @@
-
+import '../App.css'
 
 const ToDoCard = ({ toDoList, urlEndpoint, refetch }) => {
     const id = toDoList.id
